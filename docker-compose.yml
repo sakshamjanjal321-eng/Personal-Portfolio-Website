@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  qdrant:
+    image: qdrant/qdrant:latest
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - ./qdrant_storage:/qdrant/storage
+
+  vectorflow:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - EMBEDDING_PROVIDER=local
+      - VECTOR_STORE=qdrant
+      - QDRANT_URL=http://qdrant:6333
+      - LLM_MODEL=gpt-4o-mini
+    volumes:
+      - hf_cache:/root/.cache
+    depends_on:
+      - qdrant
+
+volumes:
+  hf_cache:

@@ -1,0 +1,25 @@
+[project]
+name = "vectorflow"
+version = "0.1.0"
+description = "A production-ready pipeline engine for building RAG applications"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "fastapi>=0.100.0",
+    "uvicorn>=0.22.0",
+    "pydantic>=2.0.0",
+    "python-multipart>=0.0.6",
+    "openai>=1.0.0",
+    "sentence-transformers>=2.2.0",
+    "chromadb>=0.4.0",
+    "qdrant-client>=1.4.0",
+    "pypdf>=3.9.0",
+    "numpy>=1.20.0"
+]
+
+[project.scripts]
+vectorflow = "vectorflow.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
